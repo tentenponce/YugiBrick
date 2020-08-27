@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#de9e44</color>
+    <color name="colorPrimaryDark">#de9e44</color>
+    <color name="colorAccent">#de9e44</color>
+
+    <color name="ubxOrange">#F5922F</color>
+    <color name="darkOrange">#F47721</color>
+    <color name="darkerOrange">#DC6C1E</color>
+    <color name="paleOrange">#FDF3E5</color>
+    <color name="fadeUbxOrange">#11F5922F</color>
+    <color name="orange">#FF9B21</color>
+    <color name="peachOrange">#FFCF90</color>
+    <color name="tintOrange">#FDF3E5</color>
+    <color name="lightPrimary">#55F47721</color>
+    <color name="lightOrange">#FFCCBC</color>
+    <color name="redOrange">#E24C4C</color>
+    <color name="green">#17CA83</color>
+    <color name="black">#2B2D33</color>
+    <color name="gray">#C4C4C4</color>
+    <color name="veryGray">#636363</color>
+    <color name="darkGray">#909196</color>
+    <color name="lightGray">#E1E1E1</color>
+    <color name="appBlue">#2196F3</color>
+    <color name="darkerGray">#F0F0F0</color>
+    <color name="white">#F8F8F8</color>
+    <color name="darkerWhite">#F1F1F1</color>
+    <color name="pureWhite">#FFFFFF</color>
+    <color name="customWhite">#F6F6F6</color>
+    <color name="veryDarkBlue">#2B2D33</color>
+
+    <color name="tintPaleOrange">#D67F22</color>
+    <color name="tintPaleWhite">#55FFFFFF</color>
+    <color name="tintBlack">#44000000</color>
+    <color name="tintDarkBlack">#88000000</color>
+
+    <color name="transparent">#00000000</color>
+
+    <color name="defaultWindowBackground">#EEEEEE</color>
+
+    <color name="facebookColor">#3B5998</color>
+</resources>

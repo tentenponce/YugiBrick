@@ -1,0 +1,37 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+
+    compileSdkVersion globalConfiguration["androidCompileSdkVersion"]
+    defaultConfig {
+        minSdkVersion globalConfiguration["androidMinSdkVersion"]
+        targetSdkVersion globalConfiguration["androidTargetSdkVersion"]
+    }
+
+    buildTypes {
+        release {}
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    testImplementation "junit:junit:$project.ext.jUnitVersion"
+    androidTestImplementation "androidx.test:runner:$project.ext.androidTestRunnerVersion"
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+    implementation "androidx.core:core-ktx:$project.ext.ktxVersion"
+    implementation "androidx.appcompat:appcompat:$project.ext.androidAppCompatVersion"
+    implementation "com.google.android.material:material:$project.ext.androidMaterialVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$project.ext.constraintLayoutVersion"
+
+    /* rx */
+    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+    implementation "io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion"
+}

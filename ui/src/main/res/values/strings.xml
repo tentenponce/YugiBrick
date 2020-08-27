@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- actions -->
+    <string name="action_ok">OK</string>
+    <string name="action_retry">Retry</string>
+
+    <!-- error -->
+    <string name="title_error_generic">Error</string>
+</resources>

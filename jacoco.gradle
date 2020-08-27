@@ -1,0 +1,104 @@
+apply plugin: "jacoco"
+
+jacoco {
+    toolVersion = "0.8.5"
+}
+
+tasks.withType(Test) {
+    jacoco.includeNoLocationClasses = true
+}
+
+variants().all { variant ->
+    def params = prepareJacocoParams(variant)
+    def reportTask = createReportTask(params)
+    def verificationTask = createVerificationTask(params)
+    verificationTask.dependsOn reportTask
+}
+
+def prepareJacocoParams(variant) {
+    def params = [:]
+    params.variantName = variant.name
+    params.variantCapName = variant.name.capitalize()
+    params.fileFilter = [
+            '**/R.class',
+            '**/R$*.class',
+            '**/BuildConfig.*',
+            '**/Manifest*.*',
+            '**/*Test*.*',
+            'android/**/*.*',
+            '**/*Activity**',
+            '**/*Dialog**',
+            '**/*Fragment**',
+            '**/*Item**',
+            '**/MainNavigationView**',
+            '**/DashboardMenuView**',
+            '**/LoanApplicationStatusView**',
+            '**/LoanSummaryButtonView**',
+            '**/LoanTypeView**',
+            '**/LoanSummaryExpandableView**',
+            '**/com/ubx/loaners/presentation/base/**',
+            '**/com/ubx/loaners/presentation/common/**',
+            '**/com/ubx/loaners/presentation/service/**',
+            '**/com/ubx/loaners/domain/base/**',
+            '**/com/ubx/loaners/domain/exceptions/**',
+            '**/com/ubx/loaners/domain/common/util/**',
+            '**/com/ubx/loaners/domain/models/**',
+            '**/com/ubx/loaners/data/**',
+            '**/com/ubx/loaners/di/**',
+            '**/com/ubx/loaners/App*'
+    ]
+
+    def javaClasses = fileTree(dir: variant.javaCompiler.destinationDir, excludes: params.fileFilter)
+    def kotlinClasses = fileTree(dir: "${buildDir}/tmp/kotlin-classes/${params.variantName}", excludes: params.fileFilter)
+    params.classDirectories = files([javaClasses, kotlinClasses])
+
+    params.sourceDirectories = files([
+            "$project.projectDir/src/main/java",
+            "$project.projectDir/src/${params.variantName}/java",
+            "$project.projectDir/src/main/kotlin",
+            "$project.projectDir/src/${params.variantName}/kotlin"
+    ])
+
+    params.executionData = files("${project.buildDir}/jacoco/test${params.variantCapName}UnitTest.exec")
+    return params
+}
+
+def createReportTask(params) {
+    return task("jacoco${params.variantCapName}Report", type: JacocoReport, dependsOn: "test${params.variantCapName}UnitTest") {
+        reports {
+            xml.enabled = true
+            html.enabled = true
+            csv.enabled = false
+        }
+        classDirectories.from = params.classDirectories
+        sourceDirectories.from = params.sourceDirectories
+        executionData.from = params.executionData
+    }
+}
+
+def createVerificationTask(params) {
+    return task("jacoco${params.variantCapName}Verification", type: JacocoCoverageVerification) {
+        group = "Reporting"
+        description = "Generate Jacoco coverage reports for $params.variantCapName"
+        sourceDirectories.from = params.sourceDirectories
+        classDirectories.from = params.classDirectories
+        executionData.from = params.executionData
+        violationRules {
+            rule {
+                limit {
+                    counter = 'INSTRUCTION'
+                    value = 'COVEREDRATIO'
+                    minimum = 0.8
+                }
+            }
+        }
+    }
+}
+
+def variants() {
+    if (project.android.hasProperty('libraryVariants')) {
+        return project.android.libraryVariants
+    } else {
+        return project.android.applicationVariants
+    }
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="ttextStyle" format="reference" />
+
+    <declare-styleable name="TToolbar">
+        <attr name="title" />
+        <attr name="imageLeft" format="reference" />
+        <attr name="imageRight" format="reference" />
+    </declare-styleable>
+</resources>
