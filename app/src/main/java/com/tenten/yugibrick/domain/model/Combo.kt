@@ -1,5 +1,8 @@
 package com.tenten.yugibrick.domain.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
 /**
  *
  * Created by Exequiel Egbert V. Ponce on 8/27/2020.
@@ -11,6 +14,9 @@ package com.tenten.yugibrick.domain.model
  * 3 copies of field spell
  * 3 copies of monster
  */
+@Parcelize
 data class Combo(
-    val cards: List<Card>
-)
+    val id: String,
+    val cards: List<Card>,
+    val probability: Float
+) : Parcelable

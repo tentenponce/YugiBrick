@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="@dimen/l_space">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ProgressBar
+            style="?android:progressBarStyleHorizontal"
+            android:layout_width="@dimen/grid_20"
+            android:layout_height="@dimen/grid_20"
+            android:layout_centerInParent="true"
+            android:progress="100"
+            android:progressDrawable="@drawable/bg_circle_progress_bar" />
+
+        <ProgressBar
+            android:id="@+id/pb_result"
+            style="?android:progressBarStyleHorizontal"
+            android:layout_width="@dimen/grid_20"
+            android:layout_height="@dimen/grid_20"
+            android:layout_centerInParent="true"
+            android:progressDrawable="@drawable/circle_progress_bar" />
+
+        <com.tenten.ui.TText
+            android:id="@+id/ttext_probability"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textSize="@dimen/text_large_headline"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <com.tenten.ui.TText
+        android:id="@+id/ttext_result"
+        android:layout_width="@dimen/grid_40"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="@dimen/text_large_body" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

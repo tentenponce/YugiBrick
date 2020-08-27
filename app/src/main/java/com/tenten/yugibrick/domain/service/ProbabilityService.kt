@@ -1,13 +1,24 @@
-package com.tenten.yugibrick
+package com.tenten.yugibrick.domain.service
 
+import com.tenten.yugibrick.domain.model.Card
 import com.tenten.yugibrick.domain.model.Combo
+import com.tenten.yugibrick.domain.model.ComboCalculator
+import com.tenten.yugibrick.domain.model.DeckCalculator
 import com.tenten.yugibrick.ext.round
 
 /**
  *
  * Created by Exequiel Egbert V. Ponce on 8/27/2020.
  */
-object ProbabilityUtil {
+class ProbabilityService {
+
+    fun calculate(deckCalculator: DeckCalculator): Float {
+        return combosCalculator(
+            combos = deckCalculator.combos,
+            deckCount = deckCalculator.deckSize,
+            startingHand = deckCalculator.handSize
+        )
+    }
 
     /**
      * @param combos list of your combos
@@ -27,12 +38,20 @@ object ProbabilityUtil {
 
         for (combo in combos) {
             val probabilityOfComboNotHappening =
-                1 - comboCalculator(combo, startingHand, deckCount)
+                1 - comboCalculator(combo.cards, startingHand, deckCount)
 
             productOfNotHappening *= probabilityOfComboNotHappening
         }
 
         return (1 - productOfNotHappening).round(2)
+    }
+
+    fun comboCalculator(comboCalculator: ComboCalculator): Float {
+        return comboCalculator(
+            cards = comboCalculator.cards,
+            startingHand = comboCalculator.handSize,
+            deckCount = comboCalculator.deckSize
+        )
     }
 
     /**
@@ -42,17 +61,17 @@ object ProbabilityUtil {
      *
      * @return chance of getting combo on your opening hand
      */
-    private fun comboCalculator(combo: Combo, startingHand: Int, deckCount: Int): Float {
+    fun comboCalculator(cards: List<Card>, startingHand: Int, deckCount: Int): Float {
         var remainingStartingHand = startingHand
         var remainingDeckCount = deckCount
 
         var comboProbability = 1f
 
-        for (card in combo.cards) {
+        for (card in cards) {
             comboProbability *= probabilityOfDrawingOneCopy(
                 remainingStartingHand,
                 remainingDeckCount,
-                combo.cards[0].copies
+                cards[0].copies
             )
 
             remainingStartingHand -= 1
@@ -62,7 +81,7 @@ object ProbabilityUtil {
         return comboProbability.round(2)
     }
 
-    private fun probabilityOfDrawingOneCopy(
+    fun probabilityOfDrawingOneCopy(
         startingHand: Int,
         deckCount: Int,
         numberOfCopies: Int

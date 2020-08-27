@@ -9,7 +9,7 @@
         android:id="@+id/ttoolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="@string/app_name" />
+        app:title="@string/title_combo" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,12 +17,18 @@
         android:layout_weight="1"
         android:padding="@dimen/l_space">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/lin_card_list"
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/sv_card_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/lin_card_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        </androidx.core.widget.NestedScrollView>
 
         <com.tenten.ui.TText
             android:id="@+id/ttext_help"
@@ -30,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/s_space"
             android:text="@string/label_combo_adding_card_help"
-            app:layout_constraintTop_toBottomOf="@+id/lin_card_list" />
+            app:layout_constraintTop_toBottomOf="@+id/sv_card_list" />
 
         <com.tenten.ui.TButton
             android:id="@+id/tbtn_add_card"
@@ -42,6 +48,14 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ttext_help" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <com.tenten.ui.TButton
+            android:id="@+id/tbtn_add_combo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/xs_space"
+            android:text="@string/btn_label_combo_add_combo"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@+id/tbtn_add_card" />
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -1,9 +1,11 @@
 package com.tenten.yugibrick.view.combo
 
-import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.lifecycle.Observer
 import com.tenten.ui.TToolbar
 import com.tenten.ui.util.DialogFactory
@@ -12,11 +14,11 @@ import com.tenten.yugibrick.domain.model.Card
 import com.tenten.yugibrick.view.base.BaseActivity
 import com.tenten.yugibrick.view.base.BaseViewModel
 import com.tenten.yugibrick.view.card.CardDialog
+import com.tenten.yugibrick.view.common.view.CardView
 import kotlinx.android.synthetic.main.activity_combo.lin_card_list
 import kotlinx.android.synthetic.main.activity_combo.tbtn_add_card
+import kotlinx.android.synthetic.main.activity_combo.tbtn_add_combo
 import kotlinx.android.synthetic.main.activity_combo.ttoolbar
-import kotlinx.android.synthetic.main.item_card.view.ttext_copies
-import kotlinx.android.synthetic.main.item_card.view.ttext_name
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -26,10 +28,16 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class ComboActivity(override val viewRes: Int = R.layout.activity_combo) : BaseActivity() {
 
     companion object {
+        const val COMBO = "COMBO"
+        const val DECK_SIZE = "DECK_SIZE"
+        const val HAND_SIZE = "HAND_SIZE"
+
         private const val DIALOG_CARD = "DIALOG_CARD"
 
-        fun getStartIntent(context: Context) =
+        fun getStartIntent(context: Context, deckSize: Int, handSize: Int) =
             Intent(context, ComboActivity::class.java)
+                .putExtra(DECK_SIZE, deckSize)
+                .putExtra(HAND_SIZE, handSize)
     }
 
     private val viewModel by viewModel<ComboViewModel>()
@@ -44,6 +52,16 @@ class ComboActivity(override val viewRes: Int = R.layout.activity_combo) : BaseA
         tbtn_add_card.setOnClickListener {
             viewModel.addCard()
         }
+
+        tbtn_add_combo.setOnClickListener {
+            viewModel.submitCombo()
+        }
+
+        /* init arguments */
+        viewModel.init(
+            deckSize = intent.getIntExtra(DECK_SIZE, 0),
+            handSize = intent.getIntExtra(HAND_SIZE, 0)
+        )
     }
 
     override fun initViewModels() {
@@ -53,20 +71,32 @@ class ComboActivity(override val viewRes: Int = R.layout.activity_combo) : BaseA
 
             cardDialog!!.showNow(supportFragmentManager, DIALOG_CARD)
         })
+
+        viewModel.stateShowDone.observe(this, { show ->
+            tbtn_add_combo.visibility = if (show) View.VISIBLE else View.GONE
+        })
+
+        viewModel.stateSubmitCombo.observe(this, { combo ->
+            val intent = Intent()
+                .putExtra(COMBO, combo)
+
+            setResult(Activity.RESULT_OK, intent)
+            finish()
+        })
     }
 
     private fun renderCards(cards: List<Card>) {
         cardDialog?.dismiss()
-        
+
         lin_card_list.removeAllViews()
         for (card in cards) {
-            val itemCard = layoutInflater.inflate(R.layout.item_card, lin_card_list, false)
+            val cardView = CardView(this)
 
-            itemCard.setOnClickListener {
+            cardView.set(card) {
                 DialogFactory.createListDialog(
                     this,
                     getString(R.string.label_combo_action),
-                    arrayOf("Delete")
+                    arrayOf("Delete"),
                 ) { dialog, which ->
                     dialog.dismiss()
                     when (which) {
@@ -75,13 +105,16 @@ class ComboActivity(override val viewRes: Int = R.layout.activity_combo) : BaseA
                 }.show()
             }
 
-            itemCard.ttext_name.text = card.name
+            val cardParams = LinearLayoutCompat.LayoutParams(
+                LinearLayoutCompat.LayoutParams.MATCH_PARENT,
+                LinearLayoutCompat.LayoutParams.WRAP_CONTENT
+            )
 
-            @SuppressLint("SetTextI18n")
-            itemCard.ttext_copies.text =
-                "${card.copies} ${if (card.copies > 1) "Copies" else "Copy"}"
+            cardParams.setMargins(0, 0, 0, resources.getDimension(R.dimen.xs_space).toInt())
 
-            lin_card_list.addView(itemCard)
+            cardView.layoutParams = cardParams
+
+            lin_card_list.addView(cardView)
         }
     }
 }
