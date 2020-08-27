@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <attr name="ttextStyle" format="reference" />
+    <attr name="tbuttonStyle" format="reference" />
 
     <declare-styleable name="TToolbar">
         <attr name="title" />
         <attr name="imageLeft" format="reference" />
         <attr name="imageRight" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="TEditText">
+        <attr name="android:text" />
+        <attr name="android:hint" />
+        <attr name="android:textSize" />
+        <attr name="android:textColor" />
+        <attr name="android:contentDescription" />
+        <attr name="error" format="reference" />
+        <attr name="android:inputType" />
+        <attr name="android:drawableEnd" />
     </declare-styleable>
 </resources>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/l_space">
+
+    <com.tenten.ui.TEditText
+        android:id="@+id/tet_name"
+        android:layout_width="@dimen/grid_40"
+        android:layout_height="wrap_content"
+        android:text="@string/input_label_add_card_name" />
+
+    <com.tenten.ui.TEditText
+        android:id="@+id/tet_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/xs_space"
+        android:inputType="number"
+        android:text="@string/input_label_add_card_count" />
+
+    <com.tenten.ui.TButton
+        android:id="@+id/tbtn_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/m_space"
+        android:text="@string/btn_label_combo_add_card" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -1,5 +1,6 @@
 package com.tenten.yugibrick
 
+import com.tenten.yugibrick.domain.model.Combo
 import com.tenten.yugibrick.ext.round
 
 /**
@@ -100,22 +101,3 @@ object ProbabilityUtil {
         return (numberOfChance / total).round(2)
     }
 }
-
-/**
- * number of card combination to execute combo.
- *
- * Example of a 2 card combination:
- * 3 copies of field spell
- * 3 copies of monster
- */
-data class Combo(
-    val cards: List<Card>
-)
-
-/**
- * Example: 3 copies of field spell
- */
-data class Card(
-    val copies: Int,
-    val name: String
-)

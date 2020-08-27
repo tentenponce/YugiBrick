@@ -7,7 +7,7 @@ import com.tenten.yugibrick.R
 import com.tenten.yugibrick.view.base.BaseActivity
 import com.tenten.yugibrick.view.base.BaseViewModel
 import com.tenten.yugibrick.view.common.util.FragmentUtil
-import com.tenten.yugibrick.view.main.CalculatorFragment
+import com.tenten.yugibrick.view.calculator.CalculatorFragment
 import kotlinx.android.synthetic.main.activity_drawer.drawer_layout
 import kotlinx.android.synthetic.main.activity_drawer.nav_view
 import kotlinx.android.synthetic.main.activity_drawer.ttoolbar

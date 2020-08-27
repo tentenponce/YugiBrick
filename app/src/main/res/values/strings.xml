@@ -10,4 +10,17 @@
 
     <!-- drawer -->
     <string name="menu_main">Calculate!</string>
+
+    <!-- Calculator -->
+    <string name="btn_label_calc_add_combo">Add Combo!</string>
+    <string name="label_calc_adding_combo_help">Add any combos that your deck can execute. Example: 2-card combo (Field Spell + Monster), 2-card combo (Terraforming + Monster) etc…</string>
+
+    <!-- Combo -->
+    <string name="btn_label_combo_add_card">Add Card</string>
+    <string name="label_combo_action">Action</string>
+    <string name="label_combo_adding_card_help">Add your card(s) that you need to execute your combo. Example 2-card combo: Cynet Mining x3 and Any Salamangreat x10</string>
+
+    <!-- Card -->
+    <string name="input_label_add_card_name">Card Name</string>
+    <string name="input_label_add_card_count">Number of Copies</string>
 </resources>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/l_space">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/lin_combo_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.tenten.ui.TText
+        android:id="@+id/ttext_help"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/s_space"
+        android:text="@string/label_calc_adding_combo_help"
+        app:layout_constraintTop_toBottomOf="@+id/lin_combo_list" />
+
+    <com.tenten.ui.TButton
+        android:id="@+id/tbtn_add_combo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/s_space"
+        android:text="@string/btn_label_calc_add_combo"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ttext_help" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -131,6 +131,19 @@ object DialogFactory {
             .setPositiveButton("Ok") { dialogInterface, _ -> dialogInterface.dismiss() }.create()
     }
 
+    fun createListDialog(
+        context: Context,
+        title: String,
+        choices: Array<String>,
+        listener: DialogInterface.OnClickListener
+    ): AlertDialog {
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle(title)
+
+        builder.setItems(choices, listener)
+        return builder.create()
+    }
+
     interface OnDateSetListener {
         fun onSet(year: Int, month: Int, day: Int)
     }
