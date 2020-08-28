@@ -1,0 +1,2 @@
+-dontwarn com.mikepenz.fastadapter.**
+-keep class com.mikepenz.fastadapter.**
