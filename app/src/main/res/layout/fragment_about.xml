@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/lin_developer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:orientation="vertical"
+        android:padding="@dimen/s_space">
+
+        <com.tenten.ui.TText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/label_about_developer_value"
+            android:textSize="@dimen/text_large_body"
+            android:textStyle="bold" />
+
+        <com.tenten.ui.TText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/xxs_space"
+            android:text="@string/label_about_developer_label" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/lin_github"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:orientation="vertical"
+        android:padding="@dimen/s_space">
+
+        <com.tenten.ui.TText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/label_about_github_value"
+            android:textSize="@dimen/text_large_body"
+            android:textStyle="bold" />
+
+        <com.tenten.ui.TText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/xxs_space"
+            android:text="@string/label_about_github_label" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -10,6 +10,7 @@
 
     <!-- drawer -->
     <string name="menu_main">Calculate!</string>
+    <string name="menu_about">About</string>
 
     <!-- Calculator -->
     <string name="title_item_combo">%s-card combo (%s%%)</string>
@@ -35,4 +36,11 @@
     <string name="label_result_low">%s%% chance of executing atleast 1 combo? Nice fun deck you have there. hehe.</string>
     <string name="label_result_mid">You have %s%% chance of executing atleast 1 of your combos.</string>
     <string name="label_result_high">%s%% chance of executing atleast 1 of your combos. Consistency is the key.</string>
+
+    <!-- About -->
+    <string name="label_about_developer_label">Developer</string>
+    <string name="label_about_developer_value">Tenten Ponce</string>
+
+    <string name="label_about_github_label">Code Source</string>
+    <string name="label_about_github_value">YugiBrick Github</string>
 </resources>
