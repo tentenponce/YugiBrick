@@ -71,7 +71,7 @@ class ProbabilityService {
             comboProbability *= probabilityOfDrawingOneCopy(
                 remainingStartingHand,
                 remainingDeckCount,
-                cards[0].copies
+                card.copies
             )
 
             remainingStartingHand -= 1
