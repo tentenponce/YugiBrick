@@ -5,6 +5,7 @@ import com.tenten.yugibrick.domain.interactor.CalculateCombos
 import com.tenten.yugibrick.domain.interactor.CalculateDeckCombo
 import com.tenten.yugibrick.domain.model.Combo
 import com.tenten.yugibrick.domain.model.DeckCalculator
+import com.tenten.yugibrick.ext.round
 import com.tenten.yugibrick.view.base.BaseViewModel
 import com.tenten.yugibrick.view.common.util.SingleLiveEvent
 import io.reactivex.rxkotlin.subscribeBy
@@ -57,7 +58,7 @@ class CalculatorViewModel(
         calculateDeckCombo.execute(deckCalculator)
             .doOnSubscribe { disposables.add(it) }
             .subscribeBy(onSuccess = { probability ->
-                stateProbability.value = probability
+                stateProbability.value = probability.round(2)
             })
     }
 

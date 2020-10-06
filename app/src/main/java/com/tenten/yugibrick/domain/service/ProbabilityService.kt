@@ -4,7 +4,6 @@ import com.tenten.yugibrick.domain.model.Card
 import com.tenten.yugibrick.domain.model.Combo
 import com.tenten.yugibrick.domain.model.ComboCalculator
 import com.tenten.yugibrick.domain.model.DeckCalculator
-import com.tenten.yugibrick.ext.round
 
 /**
  *
@@ -43,7 +42,7 @@ class ProbabilityService {
             productOfNotHappening *= probabilityOfComboNotHappening
         }
 
-        return (1 - productOfNotHappening).round(2)
+        return 1 - productOfNotHappening
     }
 
     fun comboCalculator(comboCalculator: ComboCalculator): Float {
@@ -55,6 +54,10 @@ class ProbabilityService {
     }
 
     /**
+     * TODO:
+     * fix if multiple cards. As of now, the answer
+     * is somewhat near on the real answer.
+     *
      * @param combo your 1, 2, 3... card combo(s)
      * @param startingHand going first is 5, 2nd is 6
      * @param deckCount your deck count duh
@@ -62,23 +65,17 @@ class ProbabilityService {
      * @return chance of getting combo on your opening hand
      */
     fun comboCalculator(cards: List<Card>, startingHand: Int, deckCount: Int): Float {
-        var remainingStartingHand = startingHand
-        var remainingDeckCount = deckCount
-
         var comboProbability = 1f
 
         for (card in cards) {
             comboProbability *= probabilityOfDrawingOneCopy(
-                remainingStartingHand,
-                remainingDeckCount,
+                startingHand,
+                deckCount,
                 card.copies
             )
-
-            remainingStartingHand -= 1
-            remainingDeckCount -= 1
         }
 
-        return comboProbability.round(2)
+        return comboProbability
     }
 
     fun probabilityOfDrawingOneCopy(
@@ -113,10 +110,10 @@ class ProbabilityService {
             productOfProbNotHappening *= probabilityOfNotHappening
         }
 
-        return (1f - productOfProbNotHappening).round(2)
+        return (1f - productOfProbNotHappening)
     }
 
     fun probability(numberOfChance: Float, total: Float): Float {
-        return (numberOfChance / total).round(2)
+        return (numberOfChance / total)
     }
 }
